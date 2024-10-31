@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>N빵경마:쾌감※베팅＠공정♬베팅</title>
+   <style>
+       @font-face {
+           font-family: 'LOTTERIACHAB';
+           src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIACHAB.woff2') format('woff2');
+           font-weight: normal;
+           font-style: normal;
+       }
+
+       body, p, div {
+           margin: 0;
+       }
+       
+       body{background-color: rgba(251, 143, 187, 1);}
+
+       #field1 {
+           height: 100vh;
+           width: 100%;
+           max-width: 500px;
+           background-color: rgba(251, 143, 187, 1);
+           margin: auto;
+           position: relative;
+       }
+
+       .title {
+           width: 75%;
+           max-width: 375px;
+           display: block;
+           margin: 0 auto 20px;
+       }
+
+       .sentence {
+           text-align: center;
+           font-size: 1.2rem;
+           word-break: keep-all;
+           margin: 20px 10px;
+           font-family: LOTTERIACHAB;
+           color: white;
+           text-shadow:
+               -2px -2px 0 #000,
+               2px -2px 0 #000,
+               -2px 2px 0 #000,
+               2px 2px 0 #000;
+       }
+
+       .flex {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           padding-top: 20px;
+       }
+
+       .game-container {
+           width: 90%;
+           background-color: white;
+           border: 4px solid black;
+           margin: 10px auto;
+           padding: 20px;
+           box-sizing: border-box;
+       }
+
+       .race-track {
+           height: 70vh;
+           width: 95%;
+           background-color: rgba(251, 143, 187, 1);
+           border: 4px solid black;
+           padding: 10px 5px;
+           margin: 10px auto;
+           display: none;
+           position: relative;
+           overflow: hidden;
+           text-align: center;
+           box-sizing: border-box;
+       }
+
+       .horse-lane {
+           width: 45px;
+           height: 100%;
+           border: 2px solid black;
+           position: relative;
+           display: inline-block;
+           margin-right: 5px;
+           background: white;
+           box-sizing: border-box;
+       }
+
+       .horse-lane:last-child {
+           margin-right: 0;
+       }
+
+       .horse {
+           width: 30px;
+           height: 30px;
+           position: absolute;
+           bottom: 10px;
+           left: 50%;
+           transform: translateX(-50%);
+           transition: bottom 0.1s linear;
+           background-size: contain;
+           background-repeat: no-repeat;
+           background-position: center;
+           border-radius: 50%;
+           border: 2px solid black;
+       }
+
+       .player-name {
+           writing-mode: vertical-lr;
+           text-orientation: upright;
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           font-family: LOTTERIACHAB;
+           font-size: 1.2rem;
+           white-space: nowrap;
+           text-align: center;
+           width: 100%;
+           color: black;
+       }
+
+       .timer-container {
+           width: 90%;
+           text-align: center;
+           margin: 15px auto;
+           padding: 10px;
+           box-sizing: border-box;
+           display: none;
+       }
+
+       .timer {
+           font-family: LOTTERIACHAB;
+           font-size: 3rem;
+           color: white;
+           text-shadow: -3px -3px 0 #000,
+                       3px -3px 0 #000,
+                       -3px 3px 0 #000,
+                       3px 3px 0 #000;
+       }
+
+       .event-message {
+           text-align: center;
+           font-family: LOTTERIACHAB;
+           color: #FF1493;
+           margin: 15px auto;
+           padding: 10px;
+           display: none;
+           font-size: 1.5rem;
+           text-shadow:
+               -2px -2px 0 #000,
+               2px -2px 0 #000,
+               -2px 2px 0 #000,
+               2px 2px 0 #000;
+       }
+
+       .modal {
+           display: none;
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-color: rgba(0, 0, 0, 0.8);
+           z-index: 1000;
+       }
+
+       .modal-content {
+           position: fixed;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           background-color: white;
+           padding: 30px;
+           border: 6px solid black;
+           width: 82%;
+           max-width: 500px;
+           border-radius: 15px;
+           animation: modalPop 0.3s ease-out;
+           
+       }
+
+       .modal-header {
+           text-align: center;
+           margin-bottom: 25px;
+           font-family: LOTTERIACHAB;
+           font-size: 2.5rem;
+           color: #FF1493;
+           text-shadow: -2px -2px 0 #000,
+                       2px -2px 0 #000,
+                       -2px 2px 0 #000,
+                       2px 2px 0 #000;
+       }
+
+       .result-item {
+           margin: 15px 0;
+           padding: 15px;
+           border-bottom: 3px solid #ccc;
+           text-align: center;
+           font-size: 1.8rem;
+           font-family: LOTTERIACHAB;
+       }
+
+       .retry-button {
+           text-align: center;
+           font-family: LOTTERIACHAB;
+           font-size: 2.5rem;
+           color: #FF1493;
+           margin-top: 25px;
+           padding: 15px;
+           cursor: pointer;
+           text-shadow: -2px -2px 0 #000,
+                       2px -2px 0 #000,
+                       -2px 2px 0 #000,
+                       2px 2px 0 #000;
+       }
+
+       .input-box {
+           border: 4px solid black;
+           background-color: white;
+           margin-bottom: 15px;
+           width: 100%;
+           box-sizing: border-box;
+       }
+
+       .game-input {
+           width: 100%;
+           padding: 12px;
+           border: none;
+           text-align: center;
+           font-family: LOTTERIACHAB;
+           font-size: 1.2rem;
+           background: transparent;
+           box-sizing: border-box;
+       }
+
+       .game-input::placeholder {
+           color: gray;
+           opacity: 1;
+       }
+
+       .player-grid {
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           gap: 15px;
+           margin: 15px 0;
+       }
+
+       .start-button {
+           text-align: center;
+           font-family: LOTTERIACHAB;
+           font-size: 3rem;
+           color: #FF1493;
+           margin-top: 20px;
+           text-shadow: -2px -2px 0 #000,
+                       2px -2px 0 #000,
+                       -2px 2px 0 #000,
+                       2px 2px 0 #000;
+           letter-spacing: 2px;
+           cursor: pointer;
+       }
+
+       @keyframes modalPop {
+           0% {
+               transform: translate(-50%, -40%);
+               opacity: 0;
+           }
+           100% {
+               transform: translate(-50%, -50%);
+               opacity: 1;
+           }
+       }
+
+       @media screen and (max-width: 768px) {
+           .horse-lane {
+               width: 40px;
+               margin-right: 4px;
+           }
+           
+           .horse {
+               width: 25px;
+               height: 25px;
+           }
+
+           .player-name {
+               font-size: 1rem;
+           }
+       }
+   </style>
+</head>
+<body>
+   <div id="field1">
+       <div class="flex">
+           <div class="hideOnStart">
+               <div><img class="title" src=title.png></div>
+           </div>
+           <div class="hideOnStart">
+               <p class="sentence">1등부터 꼴등까지 다른 배율로 금액을 나눠냅니다.<br>N빵 비율과 말의 속력은 매판 랜덤입니다.</p>
+           </div>
+           <div class="game-container hideOnStart">
+               <div class="input-box amount-box">
+                   <input type="text" placeholder="금액" class="game-input">
+               </div>
+               <div class="player-grid">
+                   <div class="input-box">
+                       <input type="text" placeholder="이름" class="game-input">
+                   </div>
+                   <div class="input-box">
+                       <input type="text" placeholder="이름" class="game-input">
+                   </div>
+                   <div class="input-box">
+                       <input type="text" placeholder="이름" class="game-input">
+                   </div>
+                   <div class="input-box">
+                       <input type="text" placeholder="이름" class="game-input">
+                   </div>
+                   <div class="input-box">
+                       <input type="text" placeholder="이름" class="game-input">
+                   </div>
+                   <div class="input-box">
+                       <input type="text" placeholder="이름" class="game-input">
+                   </div>
+               </div>
+               <div class="start-button" id="startButton">START</div>
+           </div>
+
+           <div class="race-track" id="raceTrack"></div>
+           <div class="timer-container" id="timerContainer">
+               <div class="timer" id="timer">30초</div>
+           </div>
+           <div class="event-message" id="eventMessage"></div>
+       </div>
+   </div>
+
+   <!-- 결과 모달 -->
+   <div class="modal" id="resultModal">
+       <div class="modal-content">
+           <div class="modal-header">경주 결과</div>
+           <div class="modal-body" id="modalBody"></div>
+           <div class="modal-footer">
+               <div class="retry-button" id="retryButton">다시하기</div>
+           </div>
+       </div>
+   </div>
+
+   <script>
+       document.getElementById('startButton').addEventListener('click', function() {
+           const amount = parseInt(document.querySelector('.amount-box input').value);
+           const playerInputs = document.querySelectorAll('.player-grid input');
+           const players = Array.from(playerInputs)
+               .map(input => input.value.trim())
+               .filter(name => name !== '');
+
+           if (!amount || players.length < 2) {
+               alert('금액과 최소 2명의 플레이어를 입력해주세요!');
+               return;
+           }
+
+           const elementsToHide = document.querySelectorAll('.hideOnStart');
+           elementsToHide.forEach(element => {
+               element.style.display = 'none';
+           });
+
+           createRaceTrack(players);
+           startRace(players, amount);
+       });
+
+       function createRaceTrack(players) {
+           const raceTrack = document.getElementById('raceTrack');
+           raceTrack.style.display = 'block';
+           raceTrack.innerHTML = '';
+
+           const horseImages = ['a.png', 'b.png', 'c.png', 'd.png', 'e.png', 'f.png'];
+
+           players.forEach((player, index) => {
+               const lane = document.createElement('div');
+               lane.className = 'horse-lane';
+               
+               const horse = document.createElement('div');
+               horse.className = 'horse';
+               horse.style.bottom = '10px';
+               horse.style.backgroundImage = `url(${horseImages[index]})`;
+               
+               const nameTag = document.createElement('div');
+               nameTag.className = 'player-name';
+               nameTag.textContent = player;
+               
+               lane.appendChild(nameTag);
+               lane.appendChild(horse);
+               raceTrack.appendChild(lane);
+           });
+       }
+
+       function startRace(players, totalAmount) {
+           const horses = players.map(player => ({
+               name: player,
+               position: 10,
+               speed: Math.random() * 3 + 2,
+               finished: false
+           }));
+
+           const raceTrack = document.getElementById('raceTrack');
+           const finishLine = raceTrack.offsetHeight - 70;
+           const eventMessage = document.getElementById('eventMessage');
+           let finishedCount = 0;
+
+           const timerContainer = document.getElementById('timerContainer');
+           const timerElement = document.getElementById('timer');
+           timerContainer.style.display = 'block';
+
+           let timeLeft = 30;
+           timerElement.textContent = `${timeLeft}초`;
+
+           const timeInterval = setInterval(() => {
+               timeLeft--;
+               timerElement.textContent = `${timeLeft}초`;
+               
+               if (timeLeft <= 0) {
+                   clearInterval(timeInterval);
+                   clearInterval(raceInterval);
+                   finishRace();
+               }
+           }, 1000);
+
+           const raceInterval = setInterval(() => {
+               horses.forEach((horse, index) => {
+                   if (!horse.finished) {
+                       if (Math.random() < 0.02) {
+                           const events = [
+                               { message: `${horse.name}의 말이 순간 가속!`, speedChange: 1.3 },
+                               { message: `${horse.name}의 말이 잠시 멈춤!`, speedChange: 0.7 }
+                           ];
+                           const event = events[Math.floor(Math.random() * events.length)];
+                           horse.speed *= event.speedChange;
+                           
+                           eventMessage.textContent = event.message;
+                           eventMessage.style.display = 'block';
+                           setTimeout(() => {
+                               eventMessage.style.display = 'none';
+                           }, 1000);
+                       }
+
+                       horse.position += horse.speed;
+                       const horseElement = document.querySelectorAll('.horse')[index];
+                       horseElement.style.bottom = `${horse.position}px`;
+
+                       if (horse.position >= finishLine && !horse.finished) {
+                           horse.finished = true;
+                           finishedCount++;
+                           recordResult(horse.name, finishedCount, totalAmount, players.length);
+                       }
+                   }
+               });
+
+              if (finishedCount === players.length) {
+                   clearInterval(raceInterval);
+                   clearInterval(timeInterval);
+                   timerContainer.style.display = 'none';
+                   showResults();
+               }
+           }, 50);
+
+           function finishRace() {
+               const unfinishedHorses = horses
+                   .filter(horse => !horse.finished)
+                   .sort((a, b) => b.position - a.position);
+
+               unfinishedHorses.forEach(horse => {
+                   finishedCount++;
+                   recordResult(horse.name, finishedCount, totalAmount, players.length);
+               });
+
+               timerContainer.style.display = 'none';
+               eventMessage.textContent = "시간 초과! 경주 종료!";
+               eventMessage.style.display = 'block';
+               setTimeout(() => {
+                   eventMessage.style.display = 'none';
+                   showResults();
+               }, 2000);
+           }
+       }
+
+       function recordResult(playerName, position, totalAmount, playerCount) {
+           const modalBody = document.getElementById('modalBody');
+           const share = calculatePrize(position, totalAmount, playerCount);
+           
+           const resultItem = document.createElement('div');
+           resultItem.className = 'result-item';
+           resultItem.textContent = `${position}등: ${playerName} (${share.toLocaleString()}원)`;
+           modalBody.appendChild(resultItem);
+       }
+
+       function calculatePrize(position, totalAmount, playerCount) {
+           const ratio = (playerCount - position + 1) / playerCount;
+           return Math.floor(totalAmount * ratio * 2 / playerCount);
+       }
+
+       function showResults() {
+           const modal = document.getElementById('resultModal');
+           modal.style.display = 'block';
+       }
+
+       document.getElementById('retryButton').addEventListener('click', function() {
+           location.reload();
+       });
+   </script>
+</body>
+</html>
