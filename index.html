@@ -1,620 +1,538 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>N빵경마:쾌감※베팅＠공정♬베팅</title>
-   <style>
-       @font-face {
-           font-family: 'LOTTERIACHAB';
-           src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIACHAB.woff2') format('woff2');
-           font-weight: normal;
-           font-style: normal;
-       }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noblesse Oblige</title>
+    <meta name="description" content="Noblesse Oblige Application">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=LOTTERIA+CHAB&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-       body, p, div {
-           margin: 0;
-       }
-       
-       body{
-           background-color: rgba(251, 143, 187, 1);
-       }
+        body {
+            background-color: #FF31B4;
+            font-family: 'Pretendard', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-       #field1 {
-           height: 100vh;
-           width: 100%;
-           max-width: 500px;
-           background-color: rgba(251, 143, 187, 1);
-           margin: auto;
-           position: relative;
-       }
+        .container {
+            width: 100%;
+            max-width: 393px;
+            padding: 20px;
+            margin: 0 auto;
+        }
 
-       .title {
-           width: 75%;
-           max-width: 375px;
-           display: block;
-           margin: 0 auto 20px;
-       }
+        .title-image {
+            width: 185px;
+            height: 292px;
+            margin: 0 auto;
+            background-image: url(images/title_1.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
 
-       .sentence {
-           text-align: center;
-           font-size: 1.2rem;
-           word-break: keep-all;
-           margin: 20px 10px;
-           font-family: LOTTERIACHAB;
-           color: white;
-           text-shadow:
-               -2px -2px 0 #000,
-               2px -2px 0 #000,
-               -2px 2px 0 #000,
-               2px 2px 0 #000;
-       }
+        .message-box {
+            width: 100%;
+            max-width: 177px;
+            margin: 20px auto;
+            padding: 12px;
+            background-color: #EB2991;
+            border: 4.5px solid #221F1F;
+            border-radius: 4px;
+        }
 
-       .flex {
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           padding-top: 20px;
-       }
+        .message {
+            color: white;
+            font-size: clamp(10px, 2.5vw, 12px);
+            text-align: center;
+            line-height: 1.4;
+        }
 
-       .game-container {
-           width: 90%;
-           background-color: white;
-           border: 4px solid black;
-           margin: 10px auto;
-           padding: 20px;
-           box-sizing: border-box;
-       }
+        .input-container {
+            width: 100%;
+            max-width: 306px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #EB2991;
+            border: 7.2px solid black;
+            border-radius: 4px;
+        }
 
-       .race-track {
-           height: 70vh;
-           width: 95%;
-           background-color: rgba(251, 143, 187, 1);
-           border: 4px solid black;
-           padding: 10px 5px;
-           margin: 10px auto;
-           display: none;
-           position: relative;
-           overflow: hidden;
-           text-align: center;
-           box-sizing: border-box;
-       }
+        .full-width-input {
+            width: 100%;
+            height: 36px;
+            margin-bottom: 11px;
+            padding: 8px;
+            border: 2px solid black;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 16px;
+        }
 
-       .horse-lane {
-           width: 45px;
-           height: 100%;
-           border: 2px solid black;
-           position: relative;
-           display: inline-block;
-           margin-right: 5px;
-           background: white;
-           box-sizing: border-box;
-       }
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 11px;
+            margin-bottom: 27px;
+        }
 
-       .horse-lane:last-child {
-           margin-right: 0;
-       }
+        .half-width-input {
+            width: 100%;
+            height: 36px;
+            padding: 8px;
+            border: 2px solid black;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 16px;
+        }
 
-       .horse {
-           width: 30px;
-           height: 30px;
-           position: absolute;
-           bottom: 10px;
-           left: 50%;
-           transform: translateX(-50%);
-           transition: bottom 0.1s linear;
-           background-size: contain;
-           background-repeat: no-repeat;
-           background-position: center;
-           border-radius: 50%;
-           border: 2px solid black;
-       }
+        .start-button {
+            display: block;
+            width: 136px;
+            margin: 0 auto;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
 
-       .horse.return {
-           transform: translateX(-50%) scaleY(-1);
-       }
+        .start-button img {
+            width: 100%;
+            height: auto;
+        }
 
-       .player-name {
-           writing-mode: vertical-lr;
-           text-orientation: upright;
-           position: absolute;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           font-family: LOTTERIACHAB;
-           font-size: 1.2rem;
-           white-space: nowrap;
-           text-align: center;
-           width: 100%;
-           color: black;
-       }
+        .start-button:hover {
+            transform: scale(1.05);
+        }
 
-       .finish-line {
-           position: absolute;
-           top: 10px;
-           width: 100%;
-           height: 5px;
-           background: repeating-linear-gradient(
-               90deg,
-               black,
-               black 10px,
-               white 10px,
-               white 20px
-           );
-       }
+        /* 게임 화면 스타일 */
+        .game-container {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #FF31B4;
+            padding: 20px;
+        }
 
-       .start-line {
-           position: absolute;
-           bottom: 10px;
-           width: 100%;
-           height: 5px;
-           background: repeating-linear-gradient(
-               90deg,
-               black,
-               black 10px,
-               white 10px,
-               white 20px
-           );
-       }
+        .race-track {
+            width: 100%;
+            height: 80vh;
+            position: relative;
+            border: 4.5px solid black;
+            background-color: #EB2991;
+            overflow: hidden;
+            border-radius: 15px;
+        }
 
-       .timer-container {
-           width: 90%;
-           text-align: center;
-           margin: 15px auto;
-           padding: 10px;
-           box-sizing: border-box;
-           display: none;
-       }
+        .race-lane {
+            width: 100%;
+            height: 60px;
+            border-bottom: 4.5px solid black;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            border-radius: 10px;
+        }
 
-       .timer {
-           font-family: LOTTERIACHAB;
-           font-size: 3rem;
-           color: white;
-           text-shadow: -3px -3px 0 #000,
-                       3px -3px 0 #000,
-                       -3px 3px 0 #000,
-                       3px 3px 0 #000;
-       }
+        .horse {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            transition: left 0.5s linear;
+            background-color: transparent;
+        }
 
-       .event-message {
-           text-align: center;
-           font-family: LOTTERIACHAB;
-           color: #FF1493;
-           margin: 15px auto;
-           padding: 10px;
-           display: none;
-           font-size: 1.5rem;
-           text-shadow:
-               -2px -2px 0 #000,
-               2px -2px 0 #000,
-               -2px 2px 0 #000,
-               2px 2px 0 #000;
-           white-space: pre-line;
-       }
+        .horse img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
-       .modal {
-           display: none;
-           position: fixed;
-           top: 0;
-           left: 0;
-           width: 100%;
-           height: 100%;
-           background-color: rgba(0, 0, 0, 0.8);
-           z-index: 1000;
-       }
+        .player-name {
+            color: white;
+            font-size: 14px;
+            margin-left: 10px;
+        }
 
-       .modal-content {
-           position: fixed;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           background-color: white;
-           padding: 30px;
-           border: 6px solid black;
-           width: 82%;
-           max-width: 500px;
-           border-radius: 15px;
-           animation: modalPop 0.3s ease-out;
-       }
+        /* 결과 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            max-width: 80%;
+            width: 300px;
+        }
 
-       .modal-header {
-           text-align: center;
-           margin-bottom: 25px;
-           font-family: LOTTERIACHAB;
-           font-size: 2.5rem;
-           color: #FF1493;
-           text-shadow: -2px -2px 0 #000,
-                       2px -2px 0 #000,
-                       -2px 2px 0 #000,
-                       2px 2px 0 #000;
-       }
+        .modal-content {
+            text-align: center;
+        }
 
-       .result-item {
-           margin: 15px 0;
-           padding: 15px;
-           border-bottom: 3px solid #ccc;
-           text-align: center;
-           font-size: 1.8rem;
-           font-family: LOTTERIACHAB;
-       }
+        .modal h2 {
+            margin-bottom: 20px;
+        }
 
-       .retry-button {
-           text-align: center;
-           font-family: LOTTERIACHAB;
-           font-size: 2.5rem;
-           color: #FF1493;
-           margin-top: 25px;
-           padding: 15px;
-           cursor: pointer;
-           text-shadow: -2px -2px 0 #000,
-                       2px -2px 0 #000,
-                       -2px 2px 0 #000,
-                       2px 2px 0 #000;
-       }
+        .ranking-list {
+            list-style: none;
+            padding: 0;
+        }
 
-       .input-box {
-           border: 4px solid black;
-           background-color: white;
-           margin-bottom: 15px;
-           width: 100%;
-           box-sizing: border-box;
-       }
+        .ranking-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
 
-       .game-input {
-           width: 100%;
-           padding: 12px;
-           border: none;
-           text-align: center;
-           font-family: LOTTERIACHAB;
-           font-size: 1.2rem;
-           background: transparent;
-           box-sizing: border-box;
-       }
+        .restart-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #EB2991;
+            color: white;
+            border: 4px solid black;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: 'LOTTERIA CHAB', sans-serif;
+            transition: transform 0.2s ease;
+        }
 
-       .game-input::placeholder {
-           color: gray;
-           opacity: 1;
-       }
+        .restart-button:hover {
+            transform: scale(1.05);
+        }
 
-       .player-grid {
-           display: grid;
-           grid-template-columns: repeat(2, 1fr);
-           gap: 15px;
-           margin: 15px 0;
-       }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
 
-       .start-button {
-           text-align: center;
-           font-family: LOTTERIACHAB;
-           font-size: 3rem;
-           color: #FF1493;
-           margin-top: 20px;
-           text-shadow: -2px -2px 0 #000,
-                       2px -2px 0 #000,
-                       -2px 2px 0 #000,
-                       2px 2px 0 #000;
-           letter-spacing: 2px;
-           cursor: pointer;
-       }
+        /* 이벤트 알림 모달 스타일 */
+        .event-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(235, 41, 145, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            border: 4px solid black;
+            z-index: 1000;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            min-width: 300px;
+            animation: popIn 0.3s ease-out;
+        }
 
-       @keyframes modalPop {
-           0% {
-               transform: translate(-50%, -40%);
-               opacity: 0;
-           }
-           100% {
-               transform: translate(-50%, -50%);
-               opacity: 1;
-           }
-       }
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
 
-       @media screen and (max-width: 768px) {
-           .horse-lane {
-               width: 40px;
-               margin-right: 4px;
-           }
-           
-           .horse {
-               width: 25px;
-               height: 25px;
-           }
+        .event-modal h3 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
 
-           .player-name {
-               font-size: 1rem;
-           }
-       }
-   </style>
+        .event-text {
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
-   <div id="field1">
-       <div class="flex">
-           <div class="hideOnStart">
-               <div><img class="title" src=title.png></div>
-           </div>
-           <div class="hideOnStart">
-               <p class="sentence">1등부터 꼴등까지 다른 배율로 금액을 나눠냅니다.<br>N빵 비율과 말의 속력은 매판 랜덤입니다.</p>
-           </div>
-           <div class="game-container hideOnStart">
-               <div class="input-box amount-box">
-                   <input type="text" placeholder="금액" class="game-input">
-               </div>
-               <div class="player-grid">
-                   <div class="input-box">
-                       <input type="text" placeholder="이름" class="game-input">
-                   </div>
-                   <div class="input-box">
-                       <input type="text" placeholder="이름" class="game-input">
-                   </div>
-                   <div class="input-box">
-                       <input type="text" placeholder="이름" class="game-input">
-                   </div>
-                   <div class="input-box">
-                       <input type="text" placeholder="이름" class="game-input">
-                   </div>
-                   <div class="input-box">
-                       <input type="text" placeholder="이름" class="game-input">
-                   </div>
-                   <div class="input-box">
-                       <input type="text" placeholder="이름" class="game-input">
-                   </div>
-               </div>
-               <div class="start-button" id="startButton">START</div>
-           </div>
+    <div class="container">
+        <div class="title-image"></div>
+        <div class="message-box">
+            <p class="message">노블리스 오블리제! 1위가 <br>가장 많은 금액을 부담합니다.</p>
+        </div>
+        <div class="input-container">
+            <input type="text" class="full-width-input" placeholder="금액">
+            <div class="input-grid">
+                <input type="text" class="half-width-input" placeholder="이름">
+                <input type="text" class="half-width-input" placeholder="이름">
+                <input type="text" class="half-width-input" placeholder="이름">
+                <input type="text" class="half-width-input" placeholder="이름">
+                <input type="text" class="half-width-input" placeholder="이름">
+                <input type="text" class="half-width-input" placeholder="이름">
+            </div>
+            <button class="start-button"><img src="images/START.png" alt="Start"></button>
+        </div>
+    </div>
 
-           <div class="race-track" id="raceTrack">
-              
-           </div>
-           <div class="timer-container" id="timerContainer">
-               <div class="timer" id="timer">30초</div>
-           </div>
-           <div class="event-message" id="eventMessage"></div>
-       </div>
-   </div>
+    <!-- 게임 화면 -->
+    <div class="game-container">
+        <div class="race-track"></div>
+    </div>
 
-   <!-- 결과 모달 -->
-   <div class="modal" id="resultModal">
-       <div class="modal-content">
-           <div class="modal-header">경주 결과</div>
-           <div class="modal-body" id="modalBody"></div>
-           <div class="modal-footer">
-               <div class="retry-button" id="retryButton">다시하기</div>
-           </div>
-       </div>
-   </div>
-   
-  <script>
-      document.getElementById('startButton').addEventListener('click', function() {
-          const amount = parseInt(document.querySelector('.amount-box input').value);
-          const playerInputs = document.querySelectorAll('.player-grid input');
-          const players = Array.from(playerInputs)
-              .map(input => input.value.trim())
-              .filter(name => name !== '');
+    <audio id="horseSound" src="horse-sound.mp3"></audio>
+    <audio id="horseNegativeSound" src="horse-negative.mp3"></audio>
 
-          if (!amount || players.length < 2) {
-              alert('금액과 최소 2명의 플레이어를 입력해주세요!');
-              return;
-          }
+    <!-- 이벤트 알림 모달 -->
+    <div class="event-modal">
+        <h3>🎲 이벤트 발생!</h3>
+        <div class="event-text"></div>
+    </div>
 
-          const elementsToHide = document.querySelectorAll('.hideOnStart');
-          elementsToHide.forEach(element => {
-              element.style.display = 'none';
-          });
+    <!-- 결과 모달 -->
+    <div class="modal">
+        <div class="modal-content">
+            <h2>경기 결과</h2>
+            <ul class="ranking-list"></ul>
+            <button class="restart-button">다시하기</button>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    
+   <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            const gameContainer = document.querySelector('.game-container');
+            const raceTrack = document.querySelector('.race-track');
+            const modal = document.querySelector('.modal');
+            const overlay = document.querySelector('.overlay');
+            const rankingList = document.querySelector('.ranking-list');
+            const startButton = document.querySelector('.start-button');
+            
+            let players = [];
+            let totalAmount = 0;
+            let raceFinished = false;
 
-          createRaceTrack(players);
-          startRace(players, amount);
-      });
+            startButton.addEventListener('click', () => {
+                // 입력값 검증
+                const amountInput = document.querySelector('.full-width-input');
+                const nameInputs = document.querySelectorAll('.half-width-input');
+                
+                totalAmount = parseInt(amountInput.value);
+                if (isNaN(totalAmount) || totalAmount <= 0) {
+                    alert('유효한 금액을 입력해주세요.');
+                    return;
+                }
 
-      function createRaceTrack(players) {
-          const raceTrack = document.getElementById('raceTrack');
-          raceTrack.style.display = 'block';
+                players = [];
+                nameInputs.forEach(input => {
+                    if (input.value.trim() !== '') {
+                        players.push({
+                            name: input.value.trim(),
+                            gridPosition: 0,
+                            finished: false,
+                            rank: 0
+                        });
+                    }
+                });
 
-          const horseImages = ['a.png', 'b.png', 'c.png', 'd.png', 'e.png', 'f.png'];
+                if (players.length < 2) {
+                    alert('최소 2명의 참가자가 필요합니다.');
+                    return;
+                }
 
-          players.forEach((player, index) => {
-              const lane = document.createElement('div');
-              lane.className = 'horse-lane';
-              
-              const horse = document.createElement('div');
-              horse.className = 'horse';
-              horse.style.bottom = '10px';
-              horse.style.backgroundImage = `url(${horseImages[index]})`;
-              
-              const nameTag = document.createElement('div');
-              nameTag.className = 'player-name';
-              nameTag.textContent = player;
-              
-              lane.appendChild(nameTag);
-              lane.appendChild(horse);
-              raceTrack.appendChild(lane);
-          });
-      }
+                // 게임 시작
+                container.style.display = 'none';
+                gameContainer.style.display = 'block';
+                setupRaceTrack();
+                startRace();
+            });
 
-       function startRace(players, totalAmount) {
-           const horses = players.map(player => ({
-               name: player,
-               position: 10,
-               speed: Math.random() * 3 + 2,
-               finished: false,
-               boosted: false,
-               frozen: false,
-               returning: false,
-               completedLap: false
-           }));
+            function setupRaceTrack() {
+                raceTrack.innerHTML = '';
+                const usedImages = new Set(); // 이미 사용된 이미지 추적
 
-           const raceTrack = document.getElementById('raceTrack');
-           const finishLine = raceTrack.offsetHeight - 70;
-           const startLine = 10;
-           const eventMessage = document.getElementById('eventMessage');
-           let finishedCount = 0;
+                players.forEach((player, index) => {
+                    const lane = document.createElement('div');
+                    lane.className = 'race-lane';
+                    
+                    const horse = document.createElement('div');
+                    horse.className = 'horse';
+                    horse.id = `horse-${index}`;
+                    
+                    // 랜덤으로 말 이미지 선택 (중복 방지)
+                    const horseImg = document.createElement('img');
+                    const horseImages = ['a.png', 'b.png', 'c.png', 'd.png', 'e.png', 'f.png']
+                        .filter(img => !usedImages.has(img));
+                    const randomImage = horseImages[Math.floor(Math.random() * horseImages.length)];
+                    usedImages.add(randomImage); // 사용된 이미지 기록
+                    horseImg.src = `images/${randomImage}`;
+                    horse.appendChild(horseImg);
+                    
+                    const nameLabel = document.createElement('span');
+                    nameLabel.className = 'player-name';
+                    nameLabel.textContent = player.name;
+                    
+                    lane.appendChild(horse);
+                    lane.appendChild(nameLabel);
+                    raceTrack.appendChild(lane);
+                });
+            }
 
-           const timerContainer = document.getElementById('timerContainer');
-           const timerElement = document.getElementById('timer');
-           timerContainer.style.display = 'block';
+            function startRace() {
+                raceFinished = false;
+                const GRID_SIZE = 20; // 트랙을 20개의 칸으로 나눔
+                const FINISH_LINE = GRID_SIZE - 1; // 결승선 위치
 
-           let timeLeft = 30;
-           timerElement.textContent = `${timeLeft}초`;
-           
-           let dramaticMoment = false;
+                // 각 플레이어의 위치를 그리드 단위로 초기화
+                players.forEach(player => {
+                    player.gridPosition = 0;
+                    player.finished = false;
+                    player.rank = 0;
+                });
 
-           const timeInterval = setInterval(() => {
-               timeLeft--;
-               timerElement.textContent = `${timeLeft}초`;
-               
-               if (timeLeft === 15 && !dramaticMoment) {
-                   dramaticMoment = true;
-                   const message = "격렬한 접전이 시작됩니다!\n모든 말들의 속도가 상승합니다!";
-                   eventMessage.textContent = message;
-                   eventMessage.style.display = 'block';
-                   horses.forEach(horse => {
-                       if (!horse.completedLap) horse.speed *= 1.5;
-                   });
-                   setTimeout(() => {
-                       eventMessage.style.display = 'none';
-                   }, 2000);
-               }
-               
-               if (timeLeft <= 0) {
-                   clearInterval(timeInterval);
-                   clearInterval(raceInterval);
-                   finishRace();
-               }
-           }, 1000);
+                const eventModal = document.querySelector('.event-modal');
+                const eventText = document.querySelector('.event-text');
 
-           const raceInterval = setInterval(() => {
-               if (Math.random() < 0.03) {
-                   const globalEvents = [
-                       {
-                           message: "강풍 발생!\n모든 말들의 속도가 느려집니다!",
-                           effect: () => horses.forEach(h => { if (!h.completedLap) h.speed *= 0.7; })
-                       },
-                       {
-                           message: "관중들의 함성!\n모든 말들이 힘을 냅니다!",
-                           effect: () => horses.forEach(h => { if (!h.completedLap) h.speed *= 1.4; })
-                       }
-                   ];
-                   const globalEvent = globalEvents[Math.floor(Math.random() * globalEvents.length)];
-                   eventMessage.textContent = globalEvent.message;
-                   eventMessage.style.display = 'block';
-                   globalEvent.effect();
-                   setTimeout(() => {
-                       eventMessage.style.display = 'none';
-                   }, 2000);
-               }
+                function showEventModal(message, isNegative = false) {
+                    eventText.textContent = message;
+                    eventModal.style.display = 'block';
+                    
+                    // 말 소리 재생
+                    const horseSound = document.getElementById(isNegative ? 'horseNegativeSound' : 'horseSound');
+                    horseSound.currentTime = 0;
+                    
+                    const playPromise = horseSound.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log("Audio playback failed:", error);
+                        });
+                    }
 
-               horses.forEach((horse, index) => {
-                   if (!horse.completedLap && !horse.frozen) {
-                       if (Math.random() < 0.07 && !horse.boosted) {
-                           const events = [
-                               {
-                                   message: `${horse.name}의 말이 폭주합니다!`,
-                                   effect: () => {
-                                       horse.boosted = true;
-                                       const originalSpeed = horse.speed;
-                                       horse.speed *= 2.5;
-                                       setTimeout(() => {
-                                           horse.speed = originalSpeed;
-                                           horse.boosted = false;
-                                       }, 1500);
-                                   }
-                               },
-                               {
-                                   message: `${horse.name}의 말이 넘어졌습니다!`,
-                                   effect: () => {
-                                       horse.frozen = true;
-                                       setTimeout(() => {
-                                           horse.frozen = false;
-                                       }, 1000);
-                                   }
-                               }
-                           ];
-                           const event = events[Math.floor(Math.random() * events.length)];
-                           eventMessage.textContent = event.message;
-                           eventMessage.style.display = 'block';
-                           event.effect();
-                           setTimeout(() => {
-                               eventMessage.style.display = 'none';
-                           }, 1500);
-                       }
+                    setTimeout(() => {
+                        eventModal.style.display = 'none';
+                        horseSound.pause();
+                    }, 2000);
+                }
 
-                       if (!horse.frozen) {
-                           if (!horse.returning) {
-                               horse.position += horse.speed;
-                               if (horse.position >= finishLine) {
-                                   horse.returning = true;
-                                   const horseElement = document.querySelectorAll('.horse')[index];
-                                   horseElement.classList.add('return');
-                               }
-                           } else {
-                               horse.position -= horse.speed;
-                               if (horse.position <= startLine) {
-                                   horse.completedLap = true;
-                                   finishedCount++;
-                                   recordResult(horse.name, finishedCount, totalAmount, players.length);
-                               }
-                           }
+                function getRandomEvent() {
+                    const rand = Math.random();
+                    if (rand < 0.05) return { move: -2, text: "크게 넘어져서 2칸 뒤로!" }; // 5%
+                    if (rand < 0.1) return { move: -1, text: "살짝 비틀거려서 1칸 뒤로!" }; // 5%
+                    if (rand < 0.2) return { move: 0, text: "잠시 멈춰서 휴식!" }; // 10%
+                    if (rand < 0.3) return { move: 2, text: "갑자기 힘이 나서 2칸 전진!" }; // 10%
+                    if (rand < 0.35) return { move: 3, text: "폭발적인 스퍼트로 3칸 전진!" }; // 5%
+                    return { move: 1, text: null }; // 65% 확률로 일반 이동
+                }
 
-                           const horseElement = document.querySelectorAll('.horse')[index];
-                           horseElement.style.bottom = `${horse.position}px`;
-                       }
-                   }
-               });
+                function moveHorses() {
+                    let allFinished = players.every(p => p.finished);
+                    if (allFinished) {
+                        finishRace();
+                        return;
+                    }
 
-               if (finishedCount === players.length) {
-                   clearInterval(raceInterval);
-                   clearInterval(timeInterval);
-                   timerContainer.style.display = 'none';
-                   showResults();
-               }
-           }, 50);
+                    // 각 말들의 이번 턴 이동
+                    players.forEach((player, index) => {
+                        if (player.finished) return; // 이미 완주한 말은 건너뛰기
 
-           function finishRace() {
-               const unfinishedHorses = horses
-                   .filter(horse => !horse.completedLap)
-                   .sort((a, b) => {
-                       if (b.returning === a.returning) {
-                           return b.position - a.position;
-                       }
-                       return b.returning ? -1 : 1;
-                   });
+                        const event = getRandomEvent();
+                        const horse = document.getElementById(`horse-${index}`);
+                        
+                        // 이동 거리 계산 (0보다 작아지거나 GRID_SIZE를 넘지 않도록)
+                        const newPosition = Math.max(0, Math.min(GRID_SIZE, player.gridPosition + event.move));
+                        
+                        // 이벤트 발생 시 모달 표시
+                        if (event.text) {
+                            const isNegative = event.move < 0;
+                            showEventModal(`${player.name}: ${event.text}`, isNegative);
+                        }
 
-               unfinishedHorses.forEach(horse => {
-                   finishedCount++;
-                   recordResult(horse.name, finishedCount, totalAmount, players.length);
-               });
+                        // 말 이동
+                        player.gridPosition = newPosition;
+                        const trackWidth = raceTrack.clientWidth - 40;
+                        const displayPosition = (player.gridPosition / GRID_SIZE) * trackWidth;
+                        horse.style.left = `${displayPosition}px`;
 
-               timerContainer.style.display = 'none';
-               eventMessage.textContent = "시간 초과! 경주 종료!";
-               eventMessage.style.display = 'block';
-               setTimeout(() => {
-                   eventMessage.style.display = 'none';
-                   showResults();
-               }, 2000);
-           }
-       }
+                        // 결승선 도착 체크
+                        if (player.gridPosition >= FINISH_LINE && !player.finished) {
+                            player.finished = true;
+                            const finishedCount = players.filter(p => p.finished).length;
+                            player.rank = finishedCount;
+                            showEventModal(`${player.name} ${finishedCount}등으로 완주!`);
+                        }
+                    });
 
-      function recordResult(playerName, position, totalAmount, playerCount) {
-          const modalBody = document.getElementById('modalBody');
-          const share = calculatePrize(position, totalAmount, playerCount);
-          
-          const resultItem = document.createElement('div');
-          resultItem.className = 'result-item';
-          resultItem.textContent = `${position}등: ${playerName} (${share.toLocaleString()}원)`;
-          modalBody.appendChild(resultItem);
-      }
+                    // 다음 턴을 2초 후에 실행 (이벤트 모달을 볼 수 있도록)
+                    setTimeout(() => {
+                        if (!raceFinished) moveHorses();
+                    }, 2000);
+                }
 
-      function calculatePrize(position, totalAmount, playerCount) {
-          const ratio = (playerCount - position + 1) / playerCount;
-          return Math.floor(totalAmount * ratio * 2 / playerCount);
-      }
+                function finishRace() {
+                    raceFinished = true;
+                    setTimeout(showResults, 1000);
+                }
 
-      function showResults() {
-          const modal = document.getElementById('resultModal');
-          modal.style.display = 'block';
-      }
+                moveHorses();
+            }
 
-      document.getElementById('retryButton').addEventListener('click', function() {
-          location.reload();
-      });
-  </script>
+            function showResults() {
+                // Calculate share amounts
+                const rankedPlayers = [...players].sort((a, b) => a.rank - b.rank);
+                const totalShares = players.length * (players.length + 1) / 2;
+                
+                rankingList.innerHTML = '';
+                rankedPlayers.forEach((player, index) => {
+                    const sharePercent = (players.length - index) / totalShares;
+                    const shareAmount = Math.round(totalAmount * sharePercent);
+                    
+                    const li = document.createElement('li');
+                    li.textContent = `${player.rank}등: ${player.name} - ${shareAmount}원`;
+                    rankingList.appendChild(li);
+                });
+
+                modal.style.display = 'block';
+                overlay.style.display = 'block';
+            }
+
+            // 다시하기 버튼 이벤트 리스너
+            document.querySelector('.restart-button').addEventListener('click', () => {
+                modal.style.display = 'none';
+                overlay.style.display = 'none';
+                gameContainer.style.display = 'none';
+                container.style.display = 'block';
+                
+                // 입력 필드 초기화
+                document.querySelector('.full-width-input').value = '';
+                document.querySelectorAll('.half-width-input').forEach(input => {
+                    input.value = '';
+                });
+            });
+
+            // 모달 닫기 (오버레이 클릭)
+            overlay.addEventListener('click', () => {
+                modal.style.display = 'none';
+                overlay.style.display = 'none';
+                // 초기 화면으로 돌아가기
+                gameContainer.style.display = 'none';
+                container.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>
