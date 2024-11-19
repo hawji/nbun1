@@ -8,266 +8,417 @@
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=LOTTERIA+CHAB&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+       * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            background-color: #FF31B4;
-            font-family: 'Pretendard', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+body {
+    background-color: #FF31B4;
+    font-family: 'Pretendard', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .container {
-            width: 100%;
-            max-width: 393px;
-            padding: 20px;
-            margin: 0 auto;
-        }
+.container {
+    width: 100%;
+    max-width: 393px;
+    padding: 20px;
+    margin: 0 auto;
+}
 
-        .title-image {
-            width: 185px;
-            height: 292px;
-            margin: 0 auto;
-            background-image: url(images/title_1.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
+.title-image {
+    width: 185px;
+    height: 292px;
+    margin: 0 auto;
+    background-image: url(images/title_1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-        .message-box {
-            width: 100%;
-            max-width: 177px;
-            margin: 20px auto;
-            padding: 12px;
-            background-color: #EB2991;
-            border: 4.5px solid #221F1F;
-            border-radius: 4px;
-        }
+.message-box {
+    width: 100%;
+    max-width: 177px;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #EB2991;
+    border: 4.5px solid #221F1F;
+    border-radius: 4px;
+}
 
-        .message {
-            color: white;
-            font-size: clamp(10px, 2.5vw, 12px);
-            text-align: center;
-            line-height: 1.4;
-        }
+.message {
+    color: white;
+    font-size: clamp(10px, 2.5vw, 12px);
+    text-align: center;
+    line-height: 1.4;
+}
 
-        .input-container {
-            width: 100%;
-            max-width: 306px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #EB2991;
-            border: 7.2px solid black;
-            border-radius: 4px;
-        }
+.input-container {
+    width: 100%;
+    max-width: 306px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #EB2991;
+    border: 7.2px solid black;
+    border-radius: 4px;
+}
 
-        .full-width-input {
-            width: 100%;
-            height: 36px;
-            margin-bottom: 11px;
-            padding: 8px;
-            border: 2px solid black;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 16px;
-        }
+.full-width-input {
+    width: 100%;
+    height: 36px;
+    margin-bottom: 11px;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
 
-        .input-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 11px;
-            margin-bottom: 27px;
-        }
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 11px;
+    margin-bottom: 27px;
+}
 
-        .half-width-input {
-            width: 100%;
-            height: 36px;
-            padding: 8px;
-            border: 2px solid black;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 16px;
-        }
+.half-width-input {
+    width: 100%;
+    height: 36px;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
 
-        .start-button {
-            display: block;
-            width: 136px;
-            margin: 0 auto;
-            padding: 10px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
+.start-button {
+    display: block;
+    width: 136px;
+    margin: 0 auto;
+    padding: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
 
-        .start-button img {
-            width: 100%;
-            height: auto;
-        }
+.start-button img {
+    width: 100%;
+    height: auto;
+}
 
-        .start-button:hover {
-            transform: scale(1.05);
-        }
+.start-button:hover {
+    transform: scale(1.05);
+}
 
-        /* 게임 화면 스타일 */
-        .game-container {
-            display: none;
-            width: 100%;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #FF31B4;
-            padding: 20px;
-        }
+/* 게임 화면 스타일 */
+.game-container {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #FF31B4;
+    padding: 20px;
+}
 
-        .race-track {
-            width: 100%;
-            height: 80vh;
-            position: relative;
-            border: 4.5px solid black;
-            background-color: #EB2991;
-            overflow: hidden;
-            border-radius: 15px;
-        }
+/* 레이스 트랙 스타일 */
+.race-track {
+    width: 100%;
+    position: relative;
+    border: 4.5px solid black;
+    background-color: #EB2991;
+    border-radius: 15px;
+    overflow: visible;
+    top: 20px
+   ;
+}
 
-        .race-lane {
-            width: 100%;
-            height: 60px;
-            border-bottom: 4.5px solid black;
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 0 10px;
-            border-radius: 10px;
-        }
+.race-lane {
+    width: 100%;
+    height: 60px;  /* 적절한 높이로 조정 */
+    border-bottom: 4.5px solid black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #EB2991;
+    padding: 0;
+    overflow: visible;  /* 말이 레인을 벗어날 수 있도록 설정 */
+}
 
-        .horse {
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            left: 0;
-            transition: left 0.5s linear;
-            background-color: transparent;
-        }
+.race-lane:last-child {
+    border-bottom: none;
+}
 
-        .horse img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+.horse {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    transition: left 0.5s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .player-name {
-            color: white;
-            font-size: 14px;
-            margin-left: 10px;
-        }
+.horse img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-        /* 결과 모달 스타일 */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 1000;
-            max-width: 80%;
-            width: 300px;
-        }
+.player-name {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    left: 110px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 4px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
 
-        .modal-content {
-            text-align: center;
-        }
+/* 말 움직임 애니메이션 */
+.horse {
+    animation: gallop 0.8s infinite alternate ease-in-out;
+}
 
-        .modal h2 {
-            margin-bottom: 20px;
-        }
+@keyframes gallop {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+}
 
-        .ranking-list {
-            list-style: none;
-            padding: 0;
-        }
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    max-width: 80%;
+    width: 300px;
+}
 
-        .ranking-list li {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-        }
+.modal-content {
+    text-align: center;
+}
 
-        .restart-button {
-            display: block;
-            margin: 20px auto 0;
-            padding: 10px 20px;
-            background-color: #EB2991;
-            color: white;
-            border: 4px solid black;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            font-family: 'LOTTERIA CHAB', sans-serif;
-            transition: transform 0.2s ease;
-        }
+.modal h2 {
+    margin-bottom: 20px;
+}
 
-        .restart-button:hover {
-            transform: scale(1.05);
-        }
+.ranking-list {
+    list-style: none;
+    padding: 0;
+}
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
+.ranking-list li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
 
-        /* 이벤트 알림 모달 스타일 */
-        .event-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(235, 41, 145, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            border: 4px solid black;
-            z-index: 1000;
-            color: white;
-            text-align: center;
-            font-size: 18px;
-            min-width: 300px;
-            animation: popIn 0.3s ease-out;
-        }
+.restart-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #EB2991;
+    color: white;
+    border: 4px solid black;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: 'LOTTERIA CHAB', sans-serif;
+    transition: transform 0.2s ease;
+}
 
-        @keyframes popIn {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        }
+.restart-button:hover {
+    transform: scale(1.05);
+}
 
-        .event-modal h3 {
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
 
-        .event-text {
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
+/* 이벤트 알림 모달 스타일 */
+.event-modal {
+    display: none;
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(235, 41, 145, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    border: 4px solid black;
+    z-index: 1000;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    min-width: 300px;
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.event-modal h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.event-text {
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+        
+        .horse-container {
+    width: auto;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    transition: left 0.5s linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.horse {
+    width: 200px;
+    height:200px;  /* 이름 공간 확보를 위해 높이 조정 */
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: -90px;
+}
+
+.horse img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.player-name {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    bottom: 5px;  /* 말 이미지 아래쪽에 붙도록 조정 */
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+    z-index: 2;  /* 말 이미지 위에 표시되도록 */
+}
+
+/* 말 움직임 애니메이션을 컨테이너에 적용 */
+.horse-container {
+    width: auto;
+    height: 50px;  /* 높이 축소 */
+    position: absolute;
+    left: 0;
+    transition: left 0.5s linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1; /* 말들이 겹칠 수 있도록 z-index 추가 */
+}
+@keyframes gallop {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+}
+        
+.player-name {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* 정중앙 정렬 */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 2;
+}
+.race-lane {
+    width: 100%;
+    height: 80px;
+    border-bottom: 4.5px solid white;
+    position: relative;  /* position 속성 확인 */
+    display: flex;
+    align-items: center;
+    background-color: #EB2991;
+    justify-content: center;  /* 가로 중앙 정렬 추가 */
+    padding: 0;  /* 패딩 제거 */
+}
+        
+        .ratio-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.ratio-title {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.ratio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.ratio-input {
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.ratio-label {
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 3px;
+}
+        
+        
+        
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="title-image"></div>
@@ -275,6 +426,25 @@
             <p class="message">노블리스 오블리제! 1위가 <br>가장 많은 금액을 부담합니다.</p>
         </div>
         <div class="input-container">
+           
+           <!-- 비율 설정 섹션 추가 -->
+<div class="ratio-section">
+    <div class="ratio-title">순위별 분배 비율 설정 (%)</div>
+    <div class="ratio-grid" id="ratioInputs">
+        <div>
+            <div class="ratio-label">1등</div>
+            <input type="number" class="ratio-input" value="50" min="0" max="100">
+        </div>
+        <div>
+            <div class="ratio-label">2등</div>
+            <input type="number" class="ratio-input" value="30" min="0" max="100">
+        </div>
+        <div>
+            <div class="ratio-label">3등</div>
+            <input type="number" class="ratio-input" value="20" min="0" max="100">
+        </div>
+    </div>
+</div>
             <input type="text" class="full-width-input" placeholder="금액">
             <div class="input-grid">
                 <input type="text" class="half-width-input" placeholder="이름">
@@ -311,228 +481,255 @@
         </div>
     </div>
     <div class="overlay"></div>
+
     
-   <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.container');
-            const gameContainer = document.querySelector('.game-container');
-            const raceTrack = document.querySelector('.race-track');
-            const modal = document.querySelector('.modal');
-            const overlay = document.querySelector('.overlay');
-            const rankingList = document.querySelector('.ranking-list');
-            const startButton = document.querySelector('.start-button');
-            
-            let players = [];
-            let totalAmount = 0;
-            let raceFinished = false;
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.container');
+    const gameContainer = document.querySelector('.game-container');
+    const raceTrack = document.querySelector('.race-track');
+    const modal = document.querySelector('.modal');
+    const overlay = document.querySelector('.overlay');
+    const rankingList = document.querySelector('.ranking-list');
+    const startButton = document.querySelector('.start-button');
+    
+    let players = [];
+    let totalAmount = 0;
+    let raceFinished = false;
+    let ratios = [];
 
-            startButton.addEventListener('click', () => {
-                // 입력값 검증
-                const amountInput = document.querySelector('.full-width-input');
-                const nameInputs = document.querySelectorAll('.half-width-input');
-                
-                totalAmount = parseInt(amountInput.value);
-                if (isNaN(totalAmount) || totalAmount <= 0) {
-                    alert('유효한 금액을 입력해주세요.');
-                    return;
-                }
-
-                players = [];
-                nameInputs.forEach(input => {
-                    if (input.value.trim() !== '') {
-                        players.push({
-                            name: input.value.trim(),
-                            gridPosition: 0,
-                            finished: false,
-                            rank: 0
-                        });
-                    }
-                });
-
-                if (players.length < 2) {
-                    alert('최소 2명의 참가자가 필요합니다.');
-                    return;
-                }
-
-                // 게임 시작
-                container.style.display = 'none';
-                gameContainer.style.display = 'block';
-                setupRaceTrack();
-                startRace();
-            });
-
-            function setupRaceTrack() {
-                raceTrack.innerHTML = '';
-                const usedImages = new Set(); // 이미 사용된 이미지 추적
-
-                players.forEach((player, index) => {
-                    const lane = document.createElement('div');
-                    lane.className = 'race-lane';
-                    
-                    const horse = document.createElement('div');
-                    horse.className = 'horse';
-                    horse.id = `horse-${index}`;
-                    
-                    // 랜덤으로 말 이미지 선택 (중복 방지)
-                    const horseImg = document.createElement('img');
-                    const horseImages = ['a.png', 'b.png', 'c.png', 'd.png', 'e.png', 'f.png']
-                        .filter(img => !usedImages.has(img));
-                    const randomImage = horseImages[Math.floor(Math.random() * horseImages.length)];
-                    usedImages.add(randomImage); // 사용된 이미지 기록
-                    horseImg.src = `images/${randomImage}`;
-                    horse.appendChild(horseImg);
-                    
-                    const nameLabel = document.createElement('span');
-                    nameLabel.className = 'player-name';
-                    nameLabel.textContent = player.name;
-                    
-                    lane.appendChild(horse);
-                    lane.appendChild(nameLabel);
-                    raceTrack.appendChild(lane);
-                });
+    // 비율 검증 함수
+    function validateRatios() {
+        let total = 0;
+        ratios = [];
+        const inputs = document.querySelectorAll('.ratio-input');
+        inputs.forEach(input => {
+            const value = parseFloat(input.value);
+            if (isNaN(value) || value < 0) {
+                return false;
             }
-
-            function startRace() {
-                raceFinished = false;
-                const GRID_SIZE = 20; // 트랙을 20개의 칸으로 나눔
-                const FINISH_LINE = GRID_SIZE - 1; // 결승선 위치
-
-                // 각 플레이어의 위치를 그리드 단위로 초기화
-                players.forEach(player => {
-                    player.gridPosition = 0;
-                    player.finished = false;
-                    player.rank = 0;
-                });
-
-                const eventModal = document.querySelector('.event-modal');
-                const eventText = document.querySelector('.event-text');
-
-                function showEventModal(message, isNegative = false) {
-                    eventText.textContent = message;
-                    eventModal.style.display = 'block';
-                    
-                    // 말 소리 재생
-                    const horseSound = document.getElementById(isNegative ? 'horseNegativeSound' : 'horseSound');
-                    horseSound.currentTime = 0;
-                    
-                    const playPromise = horseSound.play();
-                    
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => {
-                            console.log("Audio playback failed:", error);
-                        });
-                    }
-
-                    setTimeout(() => {
-                        eventModal.style.display = 'none';
-                        horseSound.pause();
-                    }, 2000);
-                }
-
-                function getRandomEvent() {
-                    const rand = Math.random();
-                    if (rand < 0.05) return { move: -2, text: "크게 넘어져서 2칸 뒤로!" }; // 5%
-                    if (rand < 0.1) return { move: -1, text: "살짝 비틀거려서 1칸 뒤로!" }; // 5%
-                    if (rand < 0.2) return { move: 0, text: "잠시 멈춰서 휴식!" }; // 10%
-                    if (rand < 0.3) return { move: 2, text: "갑자기 힘이 나서 2칸 전진!" }; // 10%
-                    if (rand < 0.35) return { move: 3, text: "폭발적인 스퍼트로 3칸 전진!" }; // 5%
-                    return { move: 1, text: null }; // 65% 확률로 일반 이동
-                }
-
-                function moveHorses() {
-                    let allFinished = players.every(p => p.finished);
-                    if (allFinished) {
-                        finishRace();
-                        return;
-                    }
-
-                    // 각 말들의 이번 턴 이동
-                    players.forEach((player, index) => {
-                        if (player.finished) return; // 이미 완주한 말은 건너뛰기
-
-                        const event = getRandomEvent();
-                        const horse = document.getElementById(`horse-${index}`);
-                        
-                        // 이동 거리 계산 (0보다 작아지거나 GRID_SIZE를 넘지 않도록)
-                        const newPosition = Math.max(0, Math.min(GRID_SIZE, player.gridPosition + event.move));
-                        
-                        // 이벤트 발생 시 모달 표시
-                        if (event.text) {
-                            const isNegative = event.move < 0;
-                            showEventModal(`${player.name}: ${event.text}`, isNegative);
-                        }
-
-                        // 말 이동
-                        player.gridPosition = newPosition;
-                        const trackWidth = raceTrack.clientWidth - 40;
-                        const displayPosition = (player.gridPosition / GRID_SIZE) * trackWidth;
-                        horse.style.left = `${displayPosition}px`;
-
-                        // 결승선 도착 체크
-                        if (player.gridPosition >= FINISH_LINE && !player.finished) {
-                            player.finished = true;
-                            const finishedCount = players.filter(p => p.finished).length;
-                            player.rank = finishedCount;
-                            showEventModal(`${player.name} ${finishedCount}등으로 완주!`);
-                        }
-                    });
-
-                    // 다음 턴을 2초 후에 실행 (이벤트 모달을 볼 수 있도록)
-                    setTimeout(() => {
-                        if (!raceFinished) moveHorses();
-                    }, 2000);
-                }
-
-                function finishRace() {
-                    raceFinished = true;
-                    setTimeout(showResults, 1000);
-                }
-
-                moveHorses();
-            }
-
-            function showResults() {
-                // Calculate share amounts
-                const rankedPlayers = [...players].sort((a, b) => a.rank - b.rank);
-                const totalShares = players.length * (players.length + 1) / 2;
-                
-                rankingList.innerHTML = '';
-                rankedPlayers.forEach((player, index) => {
-                    const sharePercent = (players.length - index) / totalShares;
-                    const shareAmount = Math.round(totalAmount * sharePercent);
-                    
-                    const li = document.createElement('li');
-                    li.textContent = `${player.rank}등: ${player.name} - ${shareAmount}원`;
-                    rankingList.appendChild(li);
-                });
-
-                modal.style.display = 'block';
-                overlay.style.display = 'block';
-            }
-
-            // 다시하기 버튼 이벤트 리스너
-            document.querySelector('.restart-button').addEventListener('click', () => {
-                modal.style.display = 'none';
-                overlay.style.display = 'none';
-                gameContainer.style.display = 'none';
-                container.style.display = 'block';
-                
-                // 입력 필드 초기화
-                document.querySelector('.full-width-input').value = '';
-                document.querySelectorAll('.half-width-input').forEach(input => {
-                    input.value = '';
-                });
-            });
-
-            // 모달 닫기 (오버레이 클릭)
-            overlay.addEventListener('click', () => {
-                modal.style.display = 'none';
-                overlay.style.display = 'none';
-                // 초기 화면으로 돌아가기
-                gameContainer.style.display = 'none';
-                container.style.display = 'block';
-            });
+            ratios.push(value);
+            total += value;
         });
-    </script>
+        return Math.abs(total - 100) < 0.1;
+    }
+
+    startButton.addEventListener('click', () => {
+        // 비율 검증
+        if (!validateRatios()) {
+            alert('비율의 합이 100%가 되어야 합니다.');
+            return;
+        }
+
+        // 입력값 검증
+        const amountInput = document.querySelector('.full-width-input');
+        const nameInputs = document.querySelectorAll('.half-width-input');
+        
+        totalAmount = parseInt(amountInput.value);
+        if (isNaN(totalAmount) || totalAmount <= 0) {
+            alert('유효한 금액을 입력해주세요.');
+            return;
+        }
+
+        players = [];
+        nameInputs.forEach(input => {
+            if (input.value.trim() !== '') {
+                players.push({
+                    name: input.value.trim(),
+                    gridPosition: 0,
+                    finished: false,
+                    rank: 0
+                });
+            }
+        });
+
+        if (players.length < 2) {
+            alert('최소 2명의 참가자가 필요합니다.');
+            return;
+        }
+
+        // 게임 시작
+        container.style.display = 'none';
+        gameContainer.style.display = 'block';
+        setupRaceTrack();
+        startRace();
+    });
+
+    function setupRaceTrack() {
+        raceTrack.innerHTML = '';
+        const usedImages = new Set();
+        const horseImages = ['a.gif', 'b.gif', 'c.gif', 'd.gif', 'e.gif', 'f.gif'];
+
+        players.forEach((player, index) => {
+            const lane = document.createElement('div');
+            lane.className = 'race-lane';
+            
+            const horseContainer = document.createElement('div');
+            horseContainer.className = 'horse-container';
+            horseContainer.id = `horse-${index}`;
+            
+            const horse = document.createElement('div');
+            horse.className = 'horse';
+            
+            const horseImg = document.createElement('img');
+            const availableImages = horseImages.filter(img => !usedImages.has(img));
+            if (availableImages.length === 0) {
+                usedImages.clear();
+                availableImages.push(...horseImages);
+            }
+            const randomImage = availableImages[Math.floor(Math.random() * availableImages.length)];
+            usedImages.add(randomImage);
+            
+            horseImg.src = `images/${randomImage}`;
+            horseImg.onerror = function() {
+                this.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                        <text x="50" y="50" text-anchor="middle" dy=".3em" fill="black" font-size="60">🐎</text>
+                    </svg>
+                `);
+            };
+            
+            horse.appendChild(horseImg);
+            
+            const nameLabel = document.createElement('div');
+            nameLabel.className = 'player-name';
+            nameLabel.textContent = player.name;
+            
+            horseContainer.appendChild(horse);
+            horseContainer.appendChild(nameLabel);
+            lane.appendChild(horseContainer);
+            raceTrack.appendChild(lane);
+        });
+    }
+
+    function startRace() {
+        raceFinished = false;
+        const GRID_SIZE = 20;
+        const FINISH_LINE = GRID_SIZE - 1;
+
+        players.forEach(player => {
+            player.gridPosition = 0;
+            player.finished = false;
+            player.rank = 0;
+        });
+
+        const eventModal = document.querySelector('.event-modal');
+        const eventText = document.querySelector('.event-text');
+
+        function showEventModal(message, isNegative = false) {
+            eventText.textContent = message;
+            eventModal.style.display = 'block';
+            
+            const horseSound = document.getElementById(isNegative ? 'horseNegativeSound' : 'horseSound');
+            horseSound.currentTime = 0;
+            
+            const playPromise = horseSound.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Audio playback failed:", error);
+                });
+            }
+
+            setTimeout(() => {
+                eventModal.style.display = 'none';
+                horseSound.pause();
+            }, 2000);
+        }
+
+        function getRandomEvent() {
+            const rand = Math.random();
+            if (rand < 0.05) return { move: -2, text: "크게 넘어져서 2칸 뒤로!" };
+            if (rand < 0.1) return { move: -1, text: "살짝 비틀거려서 1칸 뒤로!" };
+            if (rand < 0.2) return { move: 0, text: "잠시 멈춰서 휴식!" };
+            if (rand < 0.3) return { move: 2, text: "갑자기 힘이 나서 2칸 전진!" };
+            if (rand < 0.35) return { move: 3, text: "폭발적인 스퍼트로 3칸 전진!" };
+            return { move: 1, text: null };
+        }
+
+        function moveHorses() {
+            let allFinished = players.every(p => p.finished);
+            if (allFinished) {
+                finishRace();
+                return;
+            }
+
+            players.forEach((player, index) => {
+                if (player.finished) return;
+
+                const event = getRandomEvent();
+                const horseContainer = document.getElementById(`horse-${index}`);
+                
+                const newPosition = Math.max(0, Math.min(GRID_SIZE, player.gridPosition + event.move));
+                
+                if (event.text) {
+                    const isNegative = event.move < 0;
+                    showEventModal(`${player.name}: ${event.text}`, isNegative);
+                }
+
+                player.gridPosition = newPosition;
+                const trackWidth = raceTrack.clientWidth - 100;
+                const displayPosition = (player.gridPosition / GRID_SIZE) * trackWidth;
+                horseContainer.style.left = `${displayPosition}px`;
+
+                if (player.gridPosition >= FINISH_LINE && !player.finished) {
+                    player.finished = true;
+                    const finishedCount = players.filter(p => p.finished).length;
+                    player.rank = finishedCount;
+                    showEventModal(`${player.name} ${finishedCount}등으로 완주!`);
+                }
+            });
+
+            setTimeout(() => {
+                if (!raceFinished) moveHorses();
+            }, 2000);
+        }
+
+        function finishRace() {
+            raceFinished = true;
+            setTimeout(showResults, 1000);
+        }
+
+        moveHorses();
+    }
+
+    function showResults() {
+        const rankedPlayers = [...players].sort((a, b) => a.rank - b.rank);
+        rankingList.innerHTML = '';
+        
+        rankedPlayers.forEach((player, index) => {
+            const ratio = ratios[index] || 0;
+            const shareAmount = Math.round(totalAmount * (ratio / 100));
+            
+            const li = document.createElement('li');
+            li.textContent = `${player.rank}등: ${player.name} - ${shareAmount}원 (${ratio}%)`;
+            rankingList.appendChild(li);
+        });
+
+        modal.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+
+    // 다시하기 버튼 이벤트 리스너
+    document.querySelector('.restart-button').addEventListener('click', () => {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+        gameContainer.style.display = 'none';
+        container.style.display = 'block';
+        
+        document.querySelector('.full-width-input').value = '';
+        document.querySelectorAll('.half-width-input').forEach(input => {
+            input.value = '';
+        });
+    });
+
+    // 모달 닫기 (오버레이 클릭)
+    overlay.addEventListener('click', () => {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+        gameContainer.style.display = 'none';
+        container.style.display = 'block';
+    });
+});
+</script>
 </body>
 </html>
